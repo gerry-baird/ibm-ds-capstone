@@ -137,7 +137,7 @@ The Jupyter notebook containing the source code for this model can be viewed usi
 
 # References
 
-**[1]** [The Waitrose Effect] (https://www.independent.co.uk/property/house-prices-latest-waitrose-effect-sainsburys-marks-and-spencer-uk-property-a7760926.html)
+**[1]** [The Waitrose Effect](https://www.independent.co.uk/property/house-prices-latest-waitrose-effect-sainsburys-marks-and-spencer-uk-property-a7760926.html)
 
 **[2]** [UK Property Data, free login required](https://www.kaggle.com/hm-land-registry/uk-housing-prices-paid)
 
