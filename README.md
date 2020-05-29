@@ -90,10 +90,10 @@ With a K of 4 the clustering algorithm gave each observation a label of 0, 1,2 o
 
 Understanding the results of clustering requires some interpretation and domain knowledge. Based on my understanding I drew the following conclusions from the clustering. 
 
-•	Cluster 0: Blue. High property prices, mix of all supermarkets 
-•	Cluster 1: Red. Lower property prices, budget and mainstream supermarkets.
-•	Cluster 2: Purple. Mid-high property prices, bias towards premium supermarkets.
-•	Cluster 3: Green. Lower property prices, mix of all supermarkets  
+- Cluster 0: Blue. High property prices, mix of all supermarkets 
+- Cluster 1: Red. Lower property prices, budget and mainstream supermarkets.
+- Cluster 2: Purple. Mid-high property prices, bias towards premium supermarkets.
+- Cluster 3: Green. Lower property prices, mix of all supermarkets  
 
 What can we infer about disposable income from this analysis? The red cluster contains towns where property prices are lower than average, this alone doesn’t reveal much about income but the bias towards budget and mainstream supermarkets suggests that wages are also lower on average in these areas.
 
@@ -105,6 +105,45 @@ The purple cluster has the highest presence of premium supermarkets yet a wide r
 
 Towns from every cluster are spread around the UK but it is clear that most towns in the blue cluster are grouped around London. 
 
+![](https://github.com/gerry-baird/ibm-ds-capstone/blob/master/img/cluster1.jpg)
 
+Broadly speaking the results confirm the intuition around disposable income as house prices around London are very high yet there a mix of supermarkets catering for all budgets.
+
+# Discussion
+The results produced from this analysis confirmed the intuition around disposable income, house prices and the presence of premium supermarkets. However, a number of compromises had to be accepted.
+
+Early work with the property transaction data was done with a small subset of counties I know well. When the data was grouped to provide an average price for a town it became clear that some transactions are recorded in the wrong county. Furthermore, the same town can be represented twice if different town and district combinations are used just because of the way the data is grouped.  For example, Whychavon, Wyre Forest, Worcestershire might also be reported as Whychavon, Worcestershire, Worcestershire. As such the district feature was discarded and I relied upon Google geolocation to locate the towns.
+
+Property sales in large cities are reported at the city level so precise locations aren’t available. This also places the centre of the search radius a long way from potential supermarkets. It should be possible to improve the accuracy of the score by basing the search radius on town population, the larger the town the greater the search radius from its centre. 
+
+Some extra bias could be introduced for very small towns that can support a Waitrose. For example, Marlborough in Wiltshire is very small yet has a Tesco and a Waitrose.
+
+Some premium food retailers are hard to find. I limited my search to Waitrose, Asda, Tesco, Sainsburys, Morrisons, Aldi and Lidl. I tried to include Marks and Spencer, but they are categorised as Supermarkets where they just sell food or department stores where a food supermarket is embedded into a traditional M&S department store. I was constrained by FourSquare API limits but if I was doing this for a commercial project I would augment the supermarket category search with a broader venue search in every town. I’d also widen the search to include other supermarkets such as Co-Op and Iceland.
+
+Some food outlets, particularly from Waitrose and M&S couldn’t be described as regular supermarkets as they are found on petrol station forecourts and motorway service areas, as such these should be excluded.  
+
+I’ve tried to simplify the supermarket landscape in the UK to keep this project manageable but there are further complexities around the feature engineering of the profile score that could be explored. The scores themselves are rather arbitrary but they could be based on some derived average price for certain common foods, such as, raw chicken, gin, sliced bread. Finally, some towns have multiple Tesco’s or Sainsbury whereas my model only counts the first occurrence.
+
+# Conclusion
+Property prices and the mix of supermarkets in a given area can be an indicator of disposable income but the clustering results require domain knowledge and are open to some interpretation. Whilst I believe my interpretation is reasonable, others are possible, especially if the number of clusters is increased.
+
+Opportunities exist to improve the descriptive power of the model by incorporating additional features such as population data and a more exhaustive search for supermarket venues based on a wider range of supermarket chains and a more flexible search radius. The model could be extended to include the presence of certain car dealerships in an area to. Rather than looking for a Waitrose we’d also be looking for a Porsche or BMW dealership.  
+
+It should be noted that the presence of a certain supermarket isn’t an indicator for individual shopping behaviour. Many people, myself included, will shop at a wide range of stores depending on need. It is however a reflection of the detailed analysis a supermarket chain made, perhaps many years ago, that led to an outlet opening in a particular location.  
+
+Finally, supermarkets that were once thriving may close, new entrants such as Aldi and Lidl bring disruption. A town that could easily sustain a Waitrose or M&S may not have one because it is already saturated or has limited viable sites. The analysis that led to a store opening five years ago may give a very different result if repeated today. 
+
+The Jupyter notebook containing the source code for this model can be viewed using NBViewer here : [Notebook Viewer](https://nbviewer.jupyter.org/github/gerry-baird/ibm-ds-capstone/blob/master/Capstone%20Project.ipynb)
+
+# References
+
+**[1]** [The Waitrose Effect] (https://www.independent.co.uk/property/house-prices-latest-waitrose-effect-sainsburys-marks-and-spencer-uk-property-a7760926.html)
+
+**[2]** [UK Property Data, free login required](https://www.kaggle.com/hm-land-registry/uk-housing-prices-paid)
+
+**[3]**[Google Geocoding API](https://developers.google.com/maps/documentation/geocoding/start)
+
+
+**[4]** [FourSquare API](https://enterprise.foursquare.com/products/places)
 
 
